@@ -9,6 +9,8 @@ import '/features/home/home_screen.dart';
 import '/features/live/live_screen.dart';
 import '/features/profile/profile_screen.dart';
 
+import '/features/settings/settings_screen.dart';
+
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key, required this.shell});
 
@@ -68,6 +70,10 @@ GoRouter router(bool showOnboard, bool showLogin) => GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+      path: Routes.settings,
+      builder: (context, state) => SettingsScreen(),
     ),
   ],
 );

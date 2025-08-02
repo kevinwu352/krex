@@ -12,14 +12,28 @@ class OnboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Onboard')),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            final secures = context.read<Secures>();
-            secures.didOnboard();
-            context.go(secures.showLogin ? Routes.login : Routes.home);
-          },
-          child: Text("Done"),
+      body: ConstrainedBox(
+        constraints: BoxConstraints(
+          minWidth: double.infinity,
+          minHeight: double.infinity,
+        ),
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                final secures = context.read<Secures>();
+                secures.didOnboard();
+                context.go(secures.showLogin ? Routes.login : Routes.home);
+              },
+              child: Text("Done"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                context.push(Routes.settings);
+              },
+              child: Text("settings"),
+            ),
+          ],
         ),
       ),
     );

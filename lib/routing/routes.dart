@@ -6,5 +6,7 @@ abstract final class Routes {
   static const live = '/live';
   static const profile = '/profile';
 
+  static const settings = '/settings';
+
   // static String bookingWithId(int id) => '$booking/$id';
 }
