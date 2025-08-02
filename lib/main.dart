@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:krex/utils/secures.dart';
-
-import 'package:krex/home_screen.dart';
+import '/utils/secures.dart';
+import '/routing/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,16 +17,19 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [ChangeNotifierProvider.value(value: secures)],
-      child: MyApp(),
+      child: MyApp(showOnboard: showOnboard, showLogin: showLogin),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.showOnboard, required this.showLogin});
+
+  final bool showOnboard;
+  final bool showLogin;
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HomeScreen());
+    return MaterialApp.router(routerConfig: router(showOnboard, showLogin));
   }
 }
