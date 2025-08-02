@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:krex/utils/string_ext.dart';
 
 final class Secures extends ChangeNotifier {
   Secures({bool onDisk = true}) {
@@ -21,7 +20,7 @@ final class Secures extends ChangeNotifier {
   String? _boardedVersion;
   String? get boardedVersion => _boardedVersion;
   set boardedVersion(String? value) {
-    _lastUsername = value;
+    _boardedVersion = value;
     _raw?.write(key: 'boarded_version', value: value);
     notifyListeners();
   }
@@ -44,14 +43,24 @@ final class Secures extends ChangeNotifier {
 }
 
 extension Ext on Secures {
-  Future<bool> showOnboard(String current) async {
+  Future<bool> showOnboard() async {
     final boarded = boardedVersion ?? '';
-    final current = (await PackageInfo.fromPlatform()).version;
-    if (boarded.isNotEmpty && current.isNotEmpty) {
-      return boarded.extendedVersionNumber < current.extendedVersionNumber;
+    if (boarded.isEmpty) {
+      return true;
+    } else {
+      final current = (await PackageInfo.fromPlatform()).version;
+      if (current.isNotEmpty) {
+        return boarded.versionNum < current.versionNum;
+      }
     }
     return false;
   }
 
-  bool get showLogin => lastUsername?.isEmpty != false;
+  bool get showLogin => (lastUsername ?? '').isEmpty;
+}
+
+extension on String {
+  // '1.2.3' => 1002003
+  int get versionNum =>
+      split('.').map((e) => int.parse(e)).fold(0, (p, e) => p * 1000 + e);
 }
