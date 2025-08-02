@@ -59,7 +59,7 @@ extension Ext on Secures {
   bool get showLogin => (lastUsername ?? '').isEmpty;
 }
 
-extension on String {
+extension Version on String {
   // '1.2.3' => 1002003
   int get versionNum =>
       split('.').map((e) => int.parse(e)).fold(0, (p, e) => p * 1000 + e);
