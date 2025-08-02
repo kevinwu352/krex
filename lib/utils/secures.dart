@@ -56,6 +56,11 @@ extension Ext on Secures {
     return false;
   }
 
+  Future<void> didOnboard() async {
+    final current = (await PackageInfo.fromPlatform()).version;
+    boardedVersion = current;
+  }
+
   bool get showLogin => (lastUsername ?? '').isEmpty;
 }
 
