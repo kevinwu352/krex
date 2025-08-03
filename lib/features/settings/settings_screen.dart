@@ -7,7 +7,12 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Settings')),
-      body: Center(child: Text('data')),
+      body: ListView(
+        children: [
+          ListTile(title: Text('Language'), trailing: Icon(Icons.keyboard_arrow_right)),
+          ListTile(title: Text('Theme'), trailing: Icon(Icons.keyboard_arrow_right)),
+        ],
+      ),
     );
   }
 }
