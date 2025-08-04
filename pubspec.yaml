@@ -13,11 +13,10 @@ dependencies:
     sdk: flutter
   intl: any
 
-  path: ^1.9.1
   path_provider: ^2.1.5
+  path: ^1.9.1
 
   flutter_secure_storage: ^4.2.1
-  package_info_plus: ^8.3.0
   hive: ^2.2.3
 
   provider: ^6.1.5

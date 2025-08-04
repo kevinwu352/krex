@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+
+const currentAppVersion = '0.1.0';
 
 final class Secures extends ChangeNotifier {
   Secures({bool onDisk = true}) {
@@ -43,12 +44,12 @@ final class Secures extends ChangeNotifier {
 }
 
 extension Ext on Secures {
-  Future<bool> showOnboard() async {
+  bool get showOnboard {
     final boarded = boardedVersion ?? '';
     if (boarded.isEmpty) {
       return true;
     } else {
-      final current = (await PackageInfo.fromPlatform()).version;
+      final current = currentAppVersion;
       if (current.isNotEmpty) {
         return boarded.versionNum < current.versionNum;
       }
@@ -56,9 +57,8 @@ extension Ext on Secures {
     return false;
   }
 
-  Future<void> didOnboard() async {
-    final current = (await PackageInfo.fromPlatform()).version;
-    boardedVersion = current;
+  void didOnboard() {
+    boardedVersion = currentAppVersion;
   }
 
   bool get showLogin => (lastUsername ?? '').isEmpty;
@@ -66,6 +66,5 @@ extension Ext on Secures {
 
 extension Version on String {
   // '1.2.3' => 1002003
-  int get versionNum =>
-      split('.').map((e) => int.parse(e)).fold(0, (p, e) => p * 1000 + e);
+  int get versionNum => split('.').map((e) => int.parse(e)).fold(0, (p, e) => p * 1000 + e);
 }

@@ -10,10 +10,7 @@ void main() async {
 
   final secures = Secures();
   await secures.load();
-
-  final showOnboard = await secures.showOnboard();
-  final showLogin = secures.showLogin;
-  print('showOnboard:$showOnboard showLogin:$showLogin');
+  print('showOnboard:${secures.showOnboard} showLogin:${secures.showLogin}');
 
   final defaults = Defaults();
   await defaults.init();
@@ -22,7 +19,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [ChangeNotifierProvider.value(value: secures)],
-      child: MyApp(showOnboard: showOnboard, showLogin: showLogin),
+      child: MyApp(showOnboard: secures.showOnboard, showLogin: secures.showLogin),
     ),
   );
 }
