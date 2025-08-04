@@ -16,7 +16,8 @@ final class Defaults extends ChangeNotifier {
 
   Future<void> load() async {
     final themeVal = _box.get('theme_code');
-    _theme = themeVal is String ? themeVal : null;
+    final themeStr = themeVal is String ? themeVal : null;
+    _theme = ThemeMode.values.firstWhere((e) => e.name == themeStr, orElse: () => ThemeMode.system);
 
     final languageVal = _box.get('language_code');
     _language = languageVal is String ? languageVal : null;
@@ -24,11 +25,11 @@ final class Defaults extends ChangeNotifier {
     notifyListeners();
   }
 
-  String? _theme;
-  String? get theme => _theme;
-  set theme(String? value) {
+  late ThemeMode _theme;
+  ThemeMode get theme => _theme;
+  set theme(ThemeMode value) {
     _theme = value;
-    _box.put('theme_code', value);
+    _box.put('theme_code', value.name);
     notifyListeners();
   }
 
