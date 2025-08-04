@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
 import '/utils/storage/secures.dart';
-import '/routing/routes.dart';
+import '/ui/router.dart';
 
 import '/ui/widgets/scroll_widget.dart';
 

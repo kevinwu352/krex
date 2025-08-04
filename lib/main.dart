@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '/utils/storage/secures.dart';
 import '/utils/storage/defaults.dart';
-import '/routing/router.dart';
+import '/ui/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

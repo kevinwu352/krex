@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'routes.dart';
 
 import '/features/onboard/onboard_screen.dart';
 import '/features/auth/login_screen.dart';
@@ -35,6 +34,23 @@ class MainScreen extends StatelessWidget {
   }
 }
 
+abstract final class Routes {
+  static const onboard = '/onboard';
+  static const login = '/login';
+
+  static const home = '/home';
+  static const live = '/live';
+  static const profile = '/profile';
+
+  static const settings = '/settings';
+  static const settingsLanguage = '$settings/$_settingsLanguage';
+  static const _settingsLanguage = 'language';
+  static const settingsTheme = '$settings/$_settingsTheme';
+  static const _settingsTheme = 'theme';
+
+  // static String bookingWithId(int id) => '$booking/$id';
+}
+
 GoRouter router(bool showOnboard, bool showLogin) => GoRouter(
   initialLocation: showOnboard
       ? Routes.onboard
@@ -62,8 +78,8 @@ GoRouter router(bool showOnboard, bool showLogin) => GoRouter(
       path: Routes.settings,
       builder: (context, state) => SettingsScreen(),
       routes: [
-        GoRoute(path: Routes.settingsLanguageRel, builder: (context, state) => LanguageScreen()),
-        GoRoute(path: Routes.settingsThemeRel, builder: (context, state) => ThemeScreen()),
+        GoRoute(path: Routes._settingsLanguage, builder: (context, state) => LanguageScreen()),
+        GoRoute(path: Routes._settingsTheme, builder: (context, state) => ThemeScreen()),
       ],
     ),
   ],

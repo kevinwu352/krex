@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '/routing/routes.dart';
+import '/ui/router.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
