@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const currentAppVersion = '0.1.0';
@@ -10,12 +10,12 @@ final class Secures extends ChangeNotifier {
   FlutterSecureStorage? _raw;
 
   Future<void> load() async {
+    kDebugMode ? print(await _raw?.readAll()) : null;
+
     _boardedVersion = await _raw?.read(key: 'boarded_version');
 
     _lastUsername = await _raw?.read(key: 'last_username');
     _accessToken = await _raw?.read(key: 'access_token');
-
-    notifyListeners();
   }
 
   String? _boardedVersion;

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
@@ -8,10 +9,12 @@ final class Defaults extends ChangeNotifier {
 
   Future<void> init() async {
     final dir = await getApplicationDocumentsDirectory();
-    print(dir.path);
+    kDebugMode ? print(dir.path) : null;
     Hive.init(join(dir.path, 'hive'));
 
     _box = await Hive.openBox('defaults');
+
+    kDebugMode ? print(_box.toMap()) : null;
   }
 
   Future<void> load() async {
@@ -21,8 +24,6 @@ final class Defaults extends ChangeNotifier {
 
     final languageVal = _box.get('language_code');
     _language = languageVal is String ? languageVal : null;
-
-    notifyListeners();
   }
 
   late ThemeMode _theme;

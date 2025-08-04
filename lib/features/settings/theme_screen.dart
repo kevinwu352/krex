@@ -1,13 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '/utils/storage/defaults.dart';
 
 class ThemeScreen extends StatelessWidget {
-  const ThemeScreen({super.key});
+  ThemeScreen({super.key});
+
+  final items = ThemeMode.values.map((e) => _Item(name: e.name, mode: e)).toList();
 
   @override
   Widget build(BuildContext context) {
+    final defaults = context.watch<Defaults>();
     return Scaffold(
       appBar: AppBar(title: Text('Theme')),
-      body: Text('data'),
+      body: ListView.separated(
+        itemCount: items.length + 1,
+        separatorBuilder: (context, index) => Divider(thickness: 0),
+        itemBuilder: (context, index) {
+          if (index < items.length) {
+            final item = items[index];
+            return ListTile(
+              title: Text(item.name),
+              trailing: item.mode == defaults.theme ? Icon(Icons.check) : null,
+              onTap: () => defaults.theme = item.mode,
+            );
+          } else {
+            return Container();
+          }
+        },
+      ),
     );
   }
+}
+
+class _Item {
+  const _Item({required this.name, required this.mode});
+  final String name;
+  final ThemeMode mode;
 }

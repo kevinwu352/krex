@@ -11,17 +11,10 @@ void main() async {
 
   final secures = Secures();
   await secures.load();
-  print('showOnboard:${secures.showOnboard} showLogin:${secures.showLogin}');
 
   final defaults = Defaults();
   await defaults.init();
   await defaults.load();
-
-  // print(ThemeMode.dark.index);
-  // print(ThemeMode.dark.name);
-  // final str = 'dark';
-  // final val = ThemeMode.values.firstWhere((e) => e.name == str, orElse: () => ThemeMode.light);
-  // print(val);
 
   runApp(
     MultiProvider(
@@ -42,11 +35,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaults = context.watch<Defaults>();
+    final theme = context.select((Defaults v) => v.theme);
     return MaterialApp.router(
       theme: ThemeData(colorScheme: AppThemes.lightColorScheme),
       darkTheme: ThemeData(colorScheme: AppThemes.darkColorScheme),
-      themeMode: defaults.theme,
+      themeMode: theme,
       routerConfig: router(showOnboard, showLogin),
     );
   }
