@@ -5,7 +5,7 @@ import '/l10n/app_localizations.dart';
 
 import '/storage/secures.dart';
 import '/ui/router.dart';
-import '/ui/widgets/scroll_widget.dart';
+import '/widgets/scroll_widget.dart';
 
 class OnboardScreen extends StatelessWidget {
   const OnboardScreen({super.key});
