@@ -11,7 +11,10 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
+      appBar: AppBar(
+        title: Text('Login'),
+        actions: [IconButton(onPressed: () => context.push(Routes.settings), icon: Icon(Icons.settings))],
+      ),
       body: Center(
         child: ElevatedButton(
           onPressed: () {

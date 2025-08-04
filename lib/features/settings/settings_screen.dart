@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import '/storage/secures.dart';
 import '/ui/router.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -13,7 +16,19 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Settings')),
+      appBar: AppBar(
+        title: Text('Settings'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              final secures = context.read<Secures>();
+              secures.boardedVersion = null;
+              context.go(Routes.onboard);
+            },
+            icon: Icon(Icons.slideshow),
+          ),
+        ],
+      ),
       body: ListView.separated(
         separatorBuilder: (context, index) => Divider(thickness: 0),
         itemBuilder: (context, index) => index < items.length

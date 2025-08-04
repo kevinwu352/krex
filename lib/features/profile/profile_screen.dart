@@ -23,6 +23,7 @@ class ProfileScreen extends StatelessWidget {
             },
             icon: Icon(Icons.logout),
           ),
+          IconButton(onPressed: () => context.push(Routes.settings), icon: Icon(Icons.settings)),
         ],
       ),
       body: Center(child: Text('data')),

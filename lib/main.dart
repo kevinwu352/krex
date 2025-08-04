@@ -23,19 +23,17 @@ void main() async {
         ChangeNotifierProvider.value(value: secures),
         ChangeNotifierProvider.value(value: defaults),
       ],
-      child: MyApp(showOnboard: secures.showOnboard, showLogin: secures.showLogin),
+      child: MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.showOnboard, required this.showLogin});
-
-  final bool showOnboard;
-  final bool showLogin;
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final secures = context.read<Secures>();
     final language = context.select((Defaults v) => v.language);
     final theme = context.select((Defaults v) => v.theme);
     return MaterialApp.router(
@@ -45,7 +43,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(colorScheme: AppThemes.lightColorScheme),
       darkTheme: ThemeData(colorScheme: AppThemes.darkColorScheme),
       themeMode: theme,
-      routerConfig: router(showOnboard, showLogin),
+      routerConfig: router(secures.showOnboard, secures.showLogin),
     );
   }
 }
