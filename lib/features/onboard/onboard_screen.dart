@@ -3,9 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import '/l10n/app_localizations.dart';
 
-import '/utils/storage/secures.dart';
+import '/storage/secures.dart';
 import '/ui/router.dart';
-
 import '/ui/widgets/scroll_widget.dart';
 
 class OnboardScreen extends StatelessWidget {

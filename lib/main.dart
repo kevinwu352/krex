@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/l10n/app_localizations.dart';
 
-import '/utils/storage/secures.dart';
-import '/utils/storage/defaults.dart';
+import '/storage/secures.dart';
+import '/storage/defaults.dart';
 import '/ui/router.dart';
 import '/ui/theme.dart';
 

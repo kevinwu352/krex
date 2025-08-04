@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:krex/utils/storage/secures.dart';
+import 'package:krex/storage/secures.dart';
 
 void main() {
   group('Secures Tests', () {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '/utils/storage/defaults.dart';
+import '/storage/defaults.dart';
 
 class ThemeScreen extends StatelessWidget {
   ThemeScreen({super.key});
