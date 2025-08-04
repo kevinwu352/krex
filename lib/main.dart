@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '/utils/secures.dart';
+import '/utils/defaults.dart';
 import '/routing/router.dart';
 
 void main() async {
@@ -13,6 +14,10 @@ void main() async {
   final showOnboard = await secures.showOnboard();
   final showLogin = secures.showLogin;
   print('showOnboard:$showOnboard showLogin:$showLogin');
+
+  final defaults = Defaults();
+  await defaults.init();
+  await defaults.load();
 
   runApp(
     MultiProvider(
