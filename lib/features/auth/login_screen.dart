@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import '/storage/secures.dart';
+import '/ui/router.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -7,7 +12,17 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Login')),
-      body: Center(child: Text('data')),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            final secures = context.read<Secures>();
+            secures.lastUsername = 'kevin';
+            secures.accessToken = '123456';
+            context.go(Routes.home);
+          },
+          child: Text('Login'),
+        ),
+      ),
     );
   }
 }

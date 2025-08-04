@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import '/storage/secures.dart';
+import '/ui/router.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -6,7 +11,20 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Profile')),
+      appBar: AppBar(
+        title: Text('Profile'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              final secures = context.read<Secures>();
+              secures.lastUsername = null;
+              secures.accessToken = null;
+              context.go(Routes.login);
+            },
+            icon: Icon(Icons.logout),
+          ),
+        ],
+      ),
       body: Center(child: Text('data')),
     );
   }
