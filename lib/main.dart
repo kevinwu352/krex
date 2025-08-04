@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '/utils/secures.dart';
-import '/utils/defaults.dart';
+import '/utils/storage/secures.dart';
+import '/utils/storage/defaults.dart';
 import '/routing/router.dart';
 
 void main() async {
