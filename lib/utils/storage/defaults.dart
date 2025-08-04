@@ -23,7 +23,10 @@ final class Defaults extends ChangeNotifier {
     _theme = ThemeMode.values.firstWhere((e) => e.name == themeStr, orElse: () => ThemeMode.system);
 
     final languageVal = _box.get('language_code');
-    _language = languageVal is String ? languageVal : null;
+    final languageAry = languageVal is List<dynamic>
+        ? languageVal.map((e) => e.toString()).toList()
+        : List<String>.empty();
+    _language = languageAry.isNotEmpty ? Locale(languageAry[0], languageAry.elementAtOrNull(1)) : null;
   }
 
   late ThemeMode _theme;
@@ -34,11 +37,12 @@ final class Defaults extends ChangeNotifier {
     notifyListeners();
   }
 
-  String? _language;
-  String? get language => _language;
-  set language(String? value) {
+  Locale? _language;
+  Locale? get language => _language;
+  set language(Locale? value) {
     _language = value;
-    _box.put('language_code', value);
+    final list = value is Locale ? [value.languageCode, ?value.countryCode] : null;
+    _box.put('language_code', list);
     notifyListeners();
   }
 }
