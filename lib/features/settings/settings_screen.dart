@@ -6,8 +6,8 @@ class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   final items = const [
-    _Item(name: 'Language', route: Routes.settingsLanguage),
-    _Item(name: 'Theme', route: Routes.settingsTheme),
+    _Item(name: 'Language', value: Routes.settingsLanguage),
+    _Item(name: 'Theme', value: Routes.settingsTheme),
   ];
 
   @override
@@ -20,7 +20,7 @@ class SettingsScreen extends StatelessWidget {
             ? ListTile(
                 title: Text(items[index].name),
                 trailing: Icon(Icons.keyboard_arrow_right),
-                onTap: () => context.push(items[index].route),
+                onTap: () => context.push(items[index].value),
               )
             : Container(),
         itemCount: items.length + 1,
@@ -30,7 +30,7 @@ class SettingsScreen extends StatelessWidget {
 }
 
 class _Item {
-  const _Item({required this.name, required this.route});
+  const _Item({required this.name, required this.value});
   final String name;
-  final String route;
+  final String value;
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/l10n/app_localizations.dart';
 
 import '/utils/storage/secures.dart';
 import '/utils/storage/defaults.dart';
@@ -35,8 +36,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final language = context.select((Defaults v) => v.language);
     final theme = context.select((Defaults v) => v.theme);
     return MaterialApp.router(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: language,
       theme: ThemeData(colorScheme: AppThemes.lightColorScheme),
       darkTheme: ThemeData(colorScheme: AppThemes.darkColorScheme),
       themeMode: theme,

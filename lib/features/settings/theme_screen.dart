@@ -5,11 +5,11 @@ import '/utils/storage/defaults.dart';
 class ThemeScreen extends StatelessWidget {
   ThemeScreen({super.key});
 
-  final items = ThemeMode.values.map((e) => _Item(name: e.name, mode: e)).toList();
+  final items = ThemeMode.values.map((e) => _Item(name: e.name, value: e)).toList();
 
   @override
   Widget build(BuildContext context) {
-    final defaults = context.watch<Defaults>();
+    final defaults = context.read<Defaults>();
     return Scaffold(
       appBar: AppBar(title: Text('Theme')),
       body: ListView.separated(
@@ -20,8 +20,8 @@ class ThemeScreen extends StatelessWidget {
             final item = items[index];
             return ListTile(
               title: Text(item.name),
-              trailing: item.mode == defaults.theme ? Icon(Icons.check) : null,
-              onTap: () => defaults.theme = item.mode,
+              trailing: item.value == defaults.theme ? Icon(Icons.check) : null,
+              onTap: () => defaults.theme = item.value,
             );
           } else {
             return Container();
@@ -33,7 +33,7 @@ class ThemeScreen extends StatelessWidget {
 }
 
 class _Item {
-  const _Item({required this.name, required this.mode});
+  const _Item({required this.name, required this.value});
   final String name;
-  final ThemeMode mode;
+  final ThemeMode value;
 }
