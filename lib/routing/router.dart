@@ -10,6 +10,8 @@ import '/features/live/live_screen.dart';
 import '/features/profile/profile_screen.dart';
 
 import '/features/settings/settings_screen.dart';
+import '/features/settings/language_screen.dart';
+import '/features/settings/theme_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key, required this.shell});
@@ -46,34 +48,23 @@ GoRouter router(bool showOnboard, bool showLogin) => GoRouter(
       builder: (context, state, shell) => MainScreen(shell: shell),
       branches: [
         StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Routes.home,
-              builder: (context, state) => HomeScreen(),
-            ),
-          ],
+          routes: [GoRoute(path: Routes.home, builder: (context, state) => HomeScreen())],
         ),
         StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Routes.live,
-              builder: (context, state) => LiveScreen(),
-            ),
-          ],
+          routes: [GoRoute(path: Routes.live, builder: (context, state) => LiveScreen())],
         ),
         StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Routes.profile,
-              builder: (context, state) => ProfileScreen(),
-            ),
-          ],
+          routes: [GoRoute(path: Routes.profile, builder: (context, state) => ProfileScreen())],
         ),
       ],
     ),
     GoRoute(
       path: Routes.settings,
       builder: (context, state) => SettingsScreen(),
+      routes: [
+        GoRoute(path: Routes.settingsLanguageRel, builder: (context, state) => LanguageScreen()),
+        GoRoute(path: Routes.settingsThemeRel, builder: (context, state) => ThemeScreen()),
+      ],
     ),
   ],
 );

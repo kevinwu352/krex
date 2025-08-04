@@ -13,22 +13,24 @@ class OnboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Onboard')),
+      appBar: AppBar(
+        title: Text('Onboard'),
+        actions: [IconButton(onPressed: () => context.push(Routes.settings), icon: Icon(Icons.settings))],
+      ),
       body: ScrollWidget(
         children: [
+          Container(
+            padding: EdgeInsetsGeometry.symmetric(vertical: 50),
+            child: Column(children: [FlutterLogo(size: 120), SizedBox(height: 20), Text('WELCOME')]),
+          ),
+          SizedBox(height: 100),
           ElevatedButton(
             onPressed: () {
               final secures = context.read<Secures>();
               secures.didOnboard();
               context.go(secures.showLogin ? Routes.login : Routes.home);
             },
-            child: Text('Done'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              context.push(Routes.settings);
-            },
-            child: Text('settings'),
+            child: Text('Enter'),
           ),
         ],
       ),
