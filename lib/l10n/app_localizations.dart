@@ -107,11 +107,11 @@ abstract class AppLocalizations {
   /// **'Hello, {name}!'**
   String welcom_msg(Object name);
 
-  /// No description provided for @n_wombats.
+  /// No description provided for @some_apples.
   ///
   /// In en, this message translates to:
-  /// **'Hello, {count, plural, =0{no wombats} =1{1 wombat} other{{count} wombats}}'**
-  String n_wombats(num count);
+  /// **'Hello, {count, plural, =0{no apples} =1{1 apple} other{{count} apples}}'**
+  String some_apples(num count);
 
   /// No description provided for @escap.
   ///

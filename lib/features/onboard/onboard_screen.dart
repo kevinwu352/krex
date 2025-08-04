@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
+import '/l10n/app_localizations.dart';
 
 import '/utils/storage/secures.dart';
 import '/ui/router.dart';
@@ -32,6 +33,12 @@ class OnboardScreen extends StatelessWidget {
             },
             child: Text('Enter'),
           ),
+
+          Text(AppLocalizations.of(context)!.welcom_msg("kim")),
+          Text(AppLocalizations.of(context)!.some_apples(0)),
+          Text(AppLocalizations.of(context)!.some_apples(1)),
+          Text(AppLocalizations.of(context)!.some_apples(2)),
+          Text(AppLocalizations.of(context)!.some_apples(3)),
         ],
       ),
     );

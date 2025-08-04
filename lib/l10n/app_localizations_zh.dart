@@ -14,13 +14,13 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String n_wombats(num count) {
+  String some_apples(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count wombats',
-      one: '1 wombat',
-      zero: 'no wombats',
+      other: '$count apples',
+      one: '1 apple',
+      zero: 'no apples',
     );
     return '你好, $_temp0';
   }
@@ -39,13 +39,13 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   }
 
   @override
-  String n_wombats(num count) {
+  String some_apples(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count wombats',
-      one: '1 wombat',
-      zero: 'no wombats',
+      other: '$count apples',
+      one: '1 apple',
+      zero: 'no apples',
     );
     return '您好, $_temp0';
   }
