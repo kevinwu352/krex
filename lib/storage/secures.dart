@@ -43,7 +43,7 @@ final class Secures extends ChangeNotifier {
   }
 }
 
-extension Ext on Secures {
+extension SecuresExt on Secures {
   bool get showOnboard {
     final boarded = boardedVersion ?? '';
     if (boarded.isEmpty) {
@@ -64,7 +64,7 @@ extension Ext on Secures {
   bool get showLogin => (lastUsername ?? '').isEmpty;
 }
 
-extension Version on String {
+extension StringVersion on String {
   // '1.2.3' => 1002003
   int get versionNum => split('.').map((e) => int.parse(e)).fold(0, (p, e) => p * 1000 + e);
 }
