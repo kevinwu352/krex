@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'endpoint.dart';
 
 abstract class Networkable {
-  Future<String> req(Endpoint api);
+  Future<http.Response> req(Endpoint api);
 }
 
 final class HttpClient implements Networkable {
@@ -23,16 +23,16 @@ final class HttpClient implements Networkable {
   }
 
   @override
-  Future<String> req(Endpoint api) async {
+  Future<http.Response> req(Endpoint api) async {
     switch (api.method) {
       case ReqMethod.get:
         final uri = Uri(scheme: 'https', host: host, path: api.path, queryParameters: api.query());
         final response = await http.get(uri, headers: api.heads(headers));
-        return response.body;
+        return response;
       case ReqMethod.post:
         final uri = Uri(scheme: 'https', host: host, path: api.path);
         final response = await http.post(uri, headers: api.heads(headers), body: api.body());
-        return response.body;
+        return response;
     }
   }
 }
