@@ -23,10 +23,10 @@ void main() async {
       providers: [
         ChangeNotifierProvider.value(value: secures),
         ChangeNotifierProvider.value(value: defaults),
-        ProxyProvider<Secures, HttpClient>(
-          create: (context) => HttpClient.token(token: context.read<Secures>().accessToken),
+        ProxyProvider<Secures, Networkable>(
+          create: (context) => HttpClient.token(context.read<Secures>().accessToken),
           update: (context, value, previous) =>
-              (previous?..setToken(value.accessToken)) ?? HttpClient.token(token: value.accessToken),
+              (previous is HttpClient) ? (previous..setToken(value.accessToken)) : HttpClient.token(value.accessToken),
         ),
       ],
       child: MyApp(),
