@@ -21,20 +21,20 @@ class MessageRepository implements MessageRepo {
       final result = await _network.req(MessageApi.messageList(10));
       switch (result) {
         case Ok():
-          print(result.value);
+          // print(result.value);
           final list = await compute((message) {
             final json = jsonDecode(message) as Map<String, dynamic>;
             final data = (json['data'] as List).cast<Map<String, dynamic>>();
-            final ret = data.map((m) => Message.fromJson(m)).toList();
-            return ret;
+            final obj = data.map((m) => Message.fromJson(m)).toList();
+            return obj;
           }, result.value.body);
           return Result.ok(list);
         case Error():
-          print(result.error);
+          // print(result.error);
           return Result.error(result.error);
       }
     } catch (e) {
-      return Result.error(HttpExcep(info: 'Decode Error'));
+      return Result.error(HttpExcep.decodeError());
     }
   }
 }

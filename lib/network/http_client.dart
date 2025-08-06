@@ -6,6 +6,11 @@ import 'endpoint.dart';
 class HttpExcep implements Exception {
   HttpExcep({required this.info});
   final String info;
+  HttpExcep.networkError() : info = 'Network Error';
+  HttpExcep.statusError() : info = 'Status Error';
+  HttpExcep.decodeError() : info = 'Decode Error';
+  @override
+  String toString() => info;
 }
 
 abstract class Networkable {
@@ -44,10 +49,10 @@ final class HttpClient implements Networkable {
       if (response.statusCode >= 200 && response.statusCode < 300) {
         return Result.ok(response);
       } else {
-        return Result.error(HttpExcep(info: 'Status Error'));
+        return Result.error(HttpExcep.statusError());
       }
     } catch (e) {
-      return Result.error(HttpExcep(info: 'Network Error'));
+      return Result.error(HttpExcep.networkError());
     }
   }
 }
