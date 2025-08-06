@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/utils/result.dart';
 
 import 'message_repository.dart';
 import 'message.dart';
@@ -10,9 +11,15 @@ final class MessageViewModel extends ChangeNotifier {
 
   List<Message> messageList = [];
 
-  Future<void> _load() async {
-    final list = await _repo.messageList();
-    messageList = list;
+  Future<void> load() async {
+    final result = await _repo.messageList();
+    switch (result) {
+      case Ok():
+        print(result.value);
+      case Error():
+        print(result.error);
+    }
+    // messageList = result.value;
     notifyListeners();
   }
 }

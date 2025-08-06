@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '/features/onboard/onboard_screen.dart';
 import '/features/auth/login_screen.dart';
@@ -11,6 +12,8 @@ import '/features/profile/profile_screen.dart';
 import '/features/settings/settings_screen.dart';
 import '/features/settings/language_screen.dart';
 import '/features/settings/theme_screen.dart';
+
+import '/features/message/message_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key, required this.shell});
@@ -48,6 +51,8 @@ abstract final class Routes {
   static const settingsTheme = '$settings/$_settingsTheme';
   static const _settingsTheme = 'theme';
 
+  static const message = '/message';
+
   // static String bookingWithId(int id) => '$booking/$id';
 }
 
@@ -81,6 +86,10 @@ GoRouter router(bool showOnboard, bool showLogin) => GoRouter(
         GoRoute(path: Routes._settingsLanguage, builder: (context, state) => LanguageScreen()),
         GoRoute(path: Routes._settingsTheme, builder: (context, state) => ThemeScreen()),
       ],
+    ),
+    GoRoute(
+      path: Routes.message,
+      builder: (context, state) => MessageScreen.create(network: context.read()),
     ),
   ],
 );

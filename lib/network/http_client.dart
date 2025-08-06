@@ -1,8 +1,15 @@
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
+import '/utils/result.dart';
 import 'endpoint.dart';
 
+// exception in network
+class HttpExcep implements Exception {
+  HttpExcep({required this.info});
+  final String info;
+}
+
 abstract class Networkable {
-  Future<http.Response> req(Endpoint api);
+  Future<Result<Response>> req(Endpoint api);
 }
 
 final class HttpClient implements Networkable {
@@ -23,16 +30,24 @@ final class HttpClient implements Networkable {
   }
 
   @override
-  Future<http.Response> req(Endpoint api) async {
-    switch (api.method) {
-      case ReqMethod.get:
-        final uri = Uri(scheme: 'https', host: host, path: api.path, queryParameters: api.query());
-        final response = await http.get(uri, headers: api.heads(headers));
-        return response;
-      case ReqMethod.post:
-        final uri = Uri(scheme: 'https', host: host, path: api.path);
-        final response = await http.post(uri, headers: api.heads(headers), body: api.body());
-        return response;
+  Future<Result<Response>> req(Endpoint api) async {
+    try {
+      final Response response;
+      switch (api.method) {
+        case ReqMethod.get:
+          final uri = Uri(scheme: 'https', host: host, path: api.path, queryParameters: api.query());
+          response = await get(uri, headers: api.heads(headers));
+        case ReqMethod.post:
+          final uri = Uri(scheme: 'https', host: host, path: api.path);
+          response = await post(uri, headers: api.heads(headers), body: api.body());
+      }
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Result.ok(response);
+      } else {
+        return Result.error(HttpExcep(info: 'Status Error'));
+      }
+    } catch (e) {
+      return Result.error(HttpExcep(info: 'Network Error'));
     }
   }
 }

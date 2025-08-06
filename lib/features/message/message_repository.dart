@@ -18,20 +18,23 @@ class MessageRepository implements MessageRepo {
   @override
   Future<Result<List<Message>>> messageList() async {
     try {
-      final res = await _network.req(MessageApi.messageList(10));
-      if (res.statusCode >= 200 && res.statusCode < 300) {
-        final list = await compute((message) {
-          final json = jsonDecode(message) as Map<String, dynamic>;
-          final data = (json['data'] as List).cast<Map<String, dynamic>>();
-          final ret = data.map((m) => Message.fromJson(m)).toList();
-          return ret;
-        }, res.body);
-        return Result.ok(list);
-      } else {
-        // return Result.error('error');
+      final result = await _network.req(MessageApi.messageList(10));
+      switch (result) {
+        case Ok():
+          print(result.value);
+          final list = await compute((message) {
+            final json = jsonDecode(message) as Map<String, dynamic>;
+            final data = (json['data'] as List).cast<Map<String, dynamic>>();
+            final ret = data.map((m) => Message.fromJson(m)).toList();
+            return ret;
+          }, result.value.body);
+          return Result.ok(list);
+        case Error():
+          print(result.error);
+          return Result.error(result.error);
       }
     } catch (e) {
-      return Result.error('error');
+      return Result.error(HttpExcep(info: 'Decode Error'));
     }
   }
 }
