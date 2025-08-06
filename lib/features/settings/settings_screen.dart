@@ -4,11 +4,12 @@ import 'package:provider/provider.dart';
 
 import '/storage/secures.dart';
 import '/ui/router.dart';
+import '/utils/list_view_ext.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
-  final items = const [
+  final _items = const [
     _Item(name: 'Language', value: Routes.settingsLanguage),
     _Item(name: 'Theme', value: Routes.settingsTheme),
   ];
@@ -29,16 +30,11 @@ class SettingsScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView.separated(
-        separatorBuilder: (context, index) => Divider(thickness: 0),
-        itemBuilder: (context, index) => index < items.length
-            ? ListTile(
-                title: Text(items[index].name),
-                trailing: Icon(Icons.keyboard_arrow_right),
-                onTap: () => context.push(items[index].value),
-              )
-            : Container(),
-        itemCount: items.length + 1,
+      body: ListViewExt.separate(
+        items: _items,
+        separator: (ctx, i) => Divider(thickness: 0),
+        tile: (ctx, i, it) =>
+            ListTile(title: Text(it.name), trailing: Icon(Icons.keyboard_arrow_right), onTap: () => ctx.push(it.value)),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/network/http_client.dart';
+import '/utils/list_view_ext.dart';
 import 'message_view_model.dart';
 import 'message_repository.dart';
 
@@ -19,17 +20,10 @@ class MessageScreen extends StatelessWidget {
         listenable: Listenable.merge([_vm.load, _vm.delete]),
         builder: (context, child) {
           if (_vm.hasData) {
-            return ListView.separated(
-              itemCount: _vm.messageList.length + 1,
-              separatorBuilder: (context, index) => Divider(thickness: 0),
-              itemBuilder: (context, index) {
-                if (index < _vm.messageList.length) {
-                  final item = _vm.messageList[index];
-                  return ListTile(title: Text('[${item.id}] ${item.title}'), subtitle: Text(item.body));
-                } else {
-                  return Container();
-                }
-              },
+            return ListViewExt.separate(
+              items: _vm.messageList,
+              separator: (ctx, i) => Divider(thickness: 0),
+              tile: (ctx, i, it) => ListTile(title: Text('[${it.id}] ${it.title}'), subtitle: Text(it.body)),
             );
           }
           if (_vm.isLoading) {

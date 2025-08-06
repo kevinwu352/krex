@@ -1,32 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/storage/defaults.dart';
+import '/utils/list_view_ext.dart';
 
 class ThemeScreen extends StatelessWidget {
   ThemeScreen({super.key});
 
-  final items = ThemeMode.values.map((e) => _Item(name: e.name, value: e)).toList();
+  final _items = ThemeMode.values.map((e) => _Item(name: e.name, value: e)).toList();
 
   @override
   Widget build(BuildContext context) {
     final defaults = context.read<Defaults>();
     return Scaffold(
       appBar: AppBar(title: Text('Theme')),
-      body: ListView.separated(
-        itemCount: items.length + 1,
-        separatorBuilder: (context, index) => Divider(thickness: 0),
-        itemBuilder: (context, index) {
-          if (index < items.length) {
-            final item = items[index];
-            return ListTile(
-              title: Text(item.name),
-              trailing: item.value == defaults.theme ? Icon(Icons.check) : null,
-              onTap: () => defaults.theme = item.value,
-            );
-          } else {
-            return Container();
-          }
-        },
+      body: ListViewExt.separate(
+        items: _items,
+        separator: (ctx, i) => Divider(thickness: 0),
+        tile: (ctx, i, it) => ListTile(
+          title: Text(it.name),
+          trailing: it.value == defaults.theme ? Icon(Icons.check) : null,
+          onTap: () => defaults.theme = it.value,
+        ),
       ),
     );
   }
