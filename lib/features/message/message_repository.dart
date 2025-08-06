@@ -20,7 +20,7 @@ class MessageRepository implements MessageRepo {
   Future<Result<List<Message>>> getAllMessages() async {
     try {
       final result = await _network.req(MessageApi.getAll());
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 1));
       switch (result) {
         case Ok():
           // print(result.value);
@@ -37,7 +37,7 @@ class MessageRepository implements MessageRepo {
 
   @override
   Future<Result<void>> deleteMessage(int id) async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     if (id % 2 == 1) {
       return Result.error(HttpExcep.operationFailed());
     } else {

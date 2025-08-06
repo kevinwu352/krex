@@ -38,13 +38,17 @@ final class MessageViewModel extends ChangeNotifier {
         print(result.error);
         _error = result.error;
     }
-    notifyListeners();
     return result.toVoid();
   }
 
   Future<Result<void>> _delete(int id) async {
     final result = await _repo.deleteMessage(id);
-    notifyListeners();
+    switch (result) {
+      case Ok():
+        _messageList.removeWhere((e) => e.id == id);
+      case Error():
+        break;
+    }
     return result.toVoid();
   }
 }

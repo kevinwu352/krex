@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:krex/utils/result.dart';
 import '/network/http_client.dart';
 import '/utils/list_view_ext.dart';
 import 'message_view_model.dart';
 import 'message_repository.dart';
 
-class MessageScreen extends StatelessWidget {
+class MessageScreen extends StatefulWidget {
   const MessageScreen({super.key, required MessageViewModel vm}) : _vm = vm;
 
   final MessageViewModel _vm;
@@ -13,28 +14,57 @@ class MessageScreen extends StatelessWidget {
     : _vm = MessageViewModel(repo: MessageRepository(network: network));
 
   @override
+  State<MessageScreen> createState() => _MessageScreenState();
+}
+
+class _MessageScreenState extends State<MessageScreen> {
+  @override
+  void initState() {
+    super.initState();
+    widget._vm.delete.addListener(_onDelete);
+  }
+
+  @override
+  void dispose() {
+    widget._vm.delete.removeListener(_onDelete);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Message')),
       body: ListenableBuilder(
-        listenable: Listenable.merge([_vm.load, _vm.delete]),
+        listenable: Listenable.merge([widget._vm.load, widget._vm.delete]),
         builder: (context, child) {
-          if (_vm.hasData) {
+          if (widget._vm.hasData) {
             return ListViewExt.separate(
-              items: _vm.messageList,
+              items: widget._vm.messageList,
               separator: (ctx, i) => Divider(thickness: 0),
-              tile: (ctx, i, it) => ListTile(title: Text('[${it.id}] ${it.title}'), subtitle: Text(it.body)),
+              tile: (ctx, i, it) => ListTile(
+                title: Text('[${it.id}] ${it.title}'),
+                subtitle: Text(it.body),
+                trailing: IconButton(onPressed: () => widget._vm.delete.execute(it.id), icon: Icon(Icons.delete)),
+              ),
             );
           }
-          if (_vm.isLoading) {
+          if (widget._vm.isLoading) {
             return Center(child: CircularProgressIndicator.adaptive());
           }
-          if (_vm.failed) {
+          if (widget._vm.failed) {
             return Center(child: Text('failed'));
           }
           return Center(child: Text('empty'));
         },
       ),
     );
+  }
+
+  void _onDelete() {
+    final result = widget._vm.delete.result;
+    if (result is Error) {
+      final info = result.error.toString();
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(info)));
+    }
   }
 }
