@@ -8,7 +8,7 @@ import 'message.dart';
 
 abstract class MessageRepo {
   Future<Result<List<Message>>> getAllMessages();
-  Future<Result<void>> deleteMessage(String key);
+  Future<Result<void>> deleteMessage(int id);
 }
 
 class MessageRepository implements MessageRepo {
@@ -20,6 +20,7 @@ class MessageRepository implements MessageRepo {
   Future<Result<List<Message>>> getAllMessages() async {
     try {
       final result = await _network.req(MessageApi.getAll());
+      await Future.delayed(Duration(seconds: 2));
       switch (result) {
         case Ok():
           // print(result.value);
@@ -35,9 +36,9 @@ class MessageRepository implements MessageRepo {
   }
 
   @override
-  Future<Result<void>> deleteMessage(String key) async {
+  Future<Result<void>> deleteMessage(int id) async {
     await Future.delayed(Duration(seconds: 2));
-    if (key.endsWith('1') || key.endsWith('3') || key.endsWith('5') || key.endsWith('7') || key.endsWith('9')) {
+    if (id % 2 == 1) {
       return Result.error(HttpExcep.operationFailed());
     } else {
       return Result.ok(null);

@@ -15,13 +15,31 @@ class MessageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Message')),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // _vm.load();
-          },
-          child: Text('load'),
-        ),
+      body: ListenableBuilder(
+        listenable: Listenable.merge([_vm.load, _vm.delete]),
+        builder: (context, child) {
+          if (_vm.hasData) {
+            return ListView.separated(
+              itemCount: _vm.messageList.length + 1,
+              separatorBuilder: (context, index) => Divider(thickness: 0),
+              itemBuilder: (context, index) {
+                if (index < _vm.messageList.length) {
+                  final item = _vm.messageList[index];
+                  return ListTile(title: Text('[${item.id}] ${item.title}'), subtitle: Text(item.body));
+                } else {
+                  return Container();
+                }
+              },
+            );
+          }
+          if (_vm.isLoading) {
+            return Center(child: CircularProgressIndicator.adaptive());
+          }
+          if (_vm.failed) {
+            return Center(child: Text('failed'));
+          }
+          return Center(child: Text('empty'));
+        },
       ),
     );
   }

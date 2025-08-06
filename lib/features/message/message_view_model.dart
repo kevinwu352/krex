@@ -15,7 +15,7 @@ final class MessageViewModel extends ChangeNotifier {
   final MessageRepo _repo;
 
   bool get hasData => _messageList.isNotEmpty;
-  bool get isLoading => false;
+  bool get isLoading => load.running;
   bool get failed => _error != null;
 
   Exception? _error;
@@ -25,7 +25,7 @@ final class MessageViewModel extends ChangeNotifier {
   UnmodifiableListView<Message> get messageList => UnmodifiableListView(_messageList);
 
   late final Command0<void> load;
-  late final Command1<void, String> delete;
+  late final Command1<void, int> delete;
 
   Future<Result<void>> _load() async {
     final result = await _repo.getAllMessages();
@@ -33,15 +33,17 @@ final class MessageViewModel extends ChangeNotifier {
       case Ok():
         print(result.value);
         _messageList = result.value;
+        _error = null;
       case Error():
         print(result.error);
+        _error = result.error;
     }
     notifyListeners();
     return result.toVoid();
   }
 
-  Future<Result<void>> _delete(String key) async {
-    final result = await _repo.deleteMessage(key);
+  Future<Result<void>> _delete(int id) async {
+    final result = await _repo.deleteMessage(id);
     notifyListeners();
     return result.toVoid();
   }
