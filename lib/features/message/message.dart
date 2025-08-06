@@ -10,4 +10,7 @@ final class Message {
   }
 
   Map<String, dynamic> toJson() => {'title': title, 'body': body};
+
+  @override
+  String toString() => '[$title:$body]';
 }

@@ -1,6 +1,6 @@
-import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import '/network/http_client.dart';
+import '/network/decode.dart';
 import '/utils/result.dart';
 
 import 'message_api.dart';
@@ -22,12 +22,7 @@ class MessageRepository implements MessageRepo {
       switch (result) {
         case Ok():
           // print(result.value);
-          final list = await compute((message) {
-            final json = jsonDecode(message) as Map<String, dynamic>;
-            final data = (json['data'] as List).cast<Map<String, dynamic>>();
-            final obj = data.map((m) => Message.fromJson(m)).toList();
-            return obj;
-          }, result.value.body);
+          final list = await compute((message) => key2list(message, 'data', Message.fromJson), result.value.body);
           return Result.ok(list);
         case Error():
           // print(result.error);
