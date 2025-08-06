@@ -9,6 +9,7 @@ class HttpExcep implements Exception {
   HttpExcep.networkError() : info = 'Network Error';
   HttpExcep.statusError() : info = 'Status Error';
   HttpExcep.decodeError() : info = 'Decode Error';
+  HttpExcep.operationFailed() : info = 'Operation Failed';
   @override
   String toString() => info;
 }

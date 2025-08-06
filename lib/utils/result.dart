@@ -23,6 +23,16 @@ sealed class Result<T> {
 
   /// Creates an error [Result], completed with the specified [error].
   const factory Result.error(Exception error) = Error._;
+
+  /// Convert to Result<void>
+  Result<void> toVoid() {
+    switch (this) {
+      case Ok():
+        return Result.ok(null);
+      case Error():
+        return Result.error((this as Error).error);
+    }
+  }
 }
 
 /// Subclass of Result for values

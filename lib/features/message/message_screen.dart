@@ -18,7 +18,7 @@ class MessageScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            _vm.load();
+            // _vm.load();
           },
           child: Text('load'),
         ),
