@@ -1,5 +1,5 @@
 import 'dart:collection';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import '/utils/command.dart';
 import '/utils/result.dart';
 
@@ -31,11 +31,11 @@ final class MessageViewModel extends ChangeNotifier {
     final result = await _repo.getAllMessages();
     switch (result) {
       case Ok():
-        print(result.value);
+        if (kDebugMode) debugPrint('${result.value}');
         _messageList = result.value;
         _error = null;
       case Error():
-        print(result.error);
+        if (kDebugMode) debugPrint('${result.error}');
         _error = result.error;
     }
     return result.toVoid();

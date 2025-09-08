@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-const currentAppVersion = '0.1.0';
+const kCurrentAppVersion = '0.1.0';
 
 final class Secures extends ChangeNotifier {
   Secures({bool onDisk = true}) {
@@ -10,7 +10,7 @@ final class Secures extends ChangeNotifier {
   FlutterSecureStorage? _raw;
 
   Future<void> load() async {
-    kDebugMode ? print(await _raw?.readAll()) : null;
+    if (kDebugMode) debugPrint('${await _raw?.readAll()}');
 
     _boardedVersion = await _raw?.read(key: 'boarded_version');
 
@@ -49,7 +49,7 @@ extension SecuresExt on Secures {
     if (boarded.isEmpty) {
       return true;
     } else {
-      final current = currentAppVersion;
+      final current = kCurrentAppVersion;
       if (current.isNotEmpty) {
         return boarded.versionNum < current.versionNum;
       }
@@ -58,7 +58,7 @@ extension SecuresExt on Secures {
   }
 
   void didOnboard() {
-    boardedVersion = currentAppVersion;
+    boardedVersion = kCurrentAppVersion;
   }
 
   bool get showLogin => (lastUsername ?? '').isEmpty;

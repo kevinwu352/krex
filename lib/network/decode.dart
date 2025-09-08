@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-typedef FromJson<T> = T Function(Map<String, dynamic> json);
+typedef FromJson<T> = T Function(Map<String, dynamic>);
 
 T str2obj<T>(String str, FromJson<T> fromJson) {
   final Map<String, dynamic> json = jsonDecode(str);

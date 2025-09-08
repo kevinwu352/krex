@@ -23,11 +23,11 @@ class MessageRepository implements MessageRepo {
       await Future.delayed(Duration(seconds: 1));
       switch (result) {
         case Ok():
-          // print(result.value);
+          // if (kDebugMode) debugPrint('${result.value}');
           final list = await compute((message) => key2list(message, 'data', Message.fromJson), result.value.body);
           return Result.ok(list);
         case Error():
-          // print(result.error);
+          // if (kDebugMode) debugPrint('${result.error}');
           return Result.error(result.error);
       }
     } catch (e) {

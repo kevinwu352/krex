@@ -9,12 +9,12 @@ final class Defaults extends ChangeNotifier {
 
   Future<void> init() async {
     final dir = await getApplicationDocumentsDirectory();
-    kDebugMode ? print(dir.path) : null;
+    if (kDebugMode) debugPrint(dir.path);
     Hive.init(join(dir.path, 'hive'));
 
     _box = await Hive.openBox('defaults');
 
-    kDebugMode ? print(_box.toMap()) : null;
+    if (kDebugMode) debugPrint('${_box.toMap()}');
   }
 
   Future<void> load() async {
