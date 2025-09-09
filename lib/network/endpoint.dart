@@ -14,23 +14,23 @@ class Endpoint {
   final Map<String, String>? headers;
 
   Map<String, String>? heads(Map<String, String>? base) {
-    final into = Map<String, String>.from(headers ?? {});
+    final into = Map.of(headers ?? <String, String>{});
     if (method == ReqMethod.post && encoding == ReqEncoding.json) {
       into['Content-Type'] = 'application/json; charset=utf-8';
     }
-    final map = Map<String, String>.from(base ?? {})..addAll(into);
+    final map = Map.of(base ?? <String, String>{})..addAll(into);
     return map.isNotEmpty ? map : null;
   }
 
   Map<String, dynamic>? query() {
-    final map = Map<String, dynamic>.from(parameters ?? {});
+    final map = Map.of(parameters ?? <String, dynamic>{});
     map.updateAll((key, value) => Uri.encodeComponent(value.toString()));
     return map.isNotEmpty ? map : null;
   }
 
   // Map<String, dynamic>? / String
   Object? body() {
-    final map = Map<String, dynamic>.from(parameters ?? {});
+    final map = Map.of(parameters ?? <String, dynamic>{});
     if (method == ReqMethod.post && encoding == ReqEncoding.json) {
       return map.isNotEmpty ? jsonEncode(map) : null;
     } else {
