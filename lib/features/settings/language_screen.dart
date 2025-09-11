@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '/l10n/app_localizations.dart';
+import '/l10n/localizations.dart';
 import '/storage/defaults.dart';
 import '/utils/list_view_ext.dart';
 
