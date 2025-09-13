@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:hive/hive.dart';
+import 'hive_ext.dart';
 
 final class Defaults extends ChangeNotifier {
   late Box<dynamic> _box;
@@ -18,14 +19,11 @@ final class Defaults extends ChangeNotifier {
   }
 
   Future<void> load() async {
-    final themeVal = _box.get('theme_code');
-    final themeStr = themeVal is String ? themeVal : null;
-    _theme = ThemeMode.values.firstWhere((e) => e.name == themeStr, orElse: () => ThemeMode.system);
+    final themeVal = _box.getString('theme_code');
+    _theme = ThemeMode.values.firstWhere((e) => e.name == themeVal, orElse: () => ThemeMode.system);
 
-    final languageVal = _box.get('language_code');
-    final languageAry = languageVal is List<dynamic>
-        ? languageVal.map((e) => e.toString()).toList()
-        : List<String>.empty();
+    final languageVal = _box.getList('language_code');
+    final languageAry = languageVal is List<String> ? languageVal : List<String>.empty();
     _language = languageAry.isNotEmpty ? Locale(languageAry[0], languageAry.elementAtOrNull(1)) : null;
   }
 
