@@ -10,46 +10,18 @@ extension MapExt<K, V> on Map<K, V> {
   Map<K, V> where(bool Function(K k, V v) test) => Map.fromEntries(entries.where((e) => test(e.key, e.value)));
 
   Map<K, T> whereType<T>() => Map.fromEntries(entries.where((e) => e.value is T)).cast<K, T>();
+}
 
-  Map<K, V> nonNulls() {
-    return Map<K, V>();
+// extension IterableExt<T> on Iterable<T> {
+//   Iterable<R> compactMap<R>(R? Function(T e) transform) {
+//     return map((e) => e != null ? transform(e) : null).whereType<R>();
+//   }
+// }
+
+extension IterableExt<T> on Iterable<T> {
+  Iterable<R> compactMap<R>(R? Function(T e) transform) {
+    return map((e) => transform(e)).whereType<R>();
   }
-
-  // Iterable<T> get nonNulls => NonNullsIterable<T>(this);
-
-  // Iterable<T> whereType<T>() => WhereTypeIterable<T>(this);
-  // Map<K, T> whereTypex<T>() {
-  //   // final list = entries.whereType<MapEntry<K, T>>();
-  //   // final list = entries.where((e) => e.value is T).cast<MapEntry<K, T>>();
-  //   final list = entries.where((e) => e.value is T);
-  //   print(list);
-  //   print(list.runtimeType);
-  //   print('111');
-  //   final mmm = Map.fromEntries(list).cast<K, T>();
-  //   print('222');
-  //   print(mmm);
-  //   print(mmm.runtimeType);
-  //   print('333');
-  //   return mmm;
-
-  //   // return Map<K, T>();
-  // }
-
-  // Map<K, V> where(bool Function(K k, V v) test) {
-  //   return Map.fromEntries(entries.where((e) => test(e.key, e.value)));
-  //   // final list = entries.where((e) => test(e.key, e.value));
-  //   // final mmm = Map.fromEntries(list);
-  //   // return mmm;
-
-  //   //   entries.where((entry) => entry.value != null)
-  //   // .map((entry) => MapEntry(entry.key, entry.value as int)), // Cast to non-nullable int
-
-  //   // return this;
-  //   //     return Map.fromEntries(
-  //   //   entries.where((entry) => entry.value != null)
-  //   //     .map((entry) => MapEntry(entry.key, entry.value as int)), // Cast to non-nullable int
-  //   // );
-  // }
 }
 
 void foo() {
