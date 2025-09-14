@@ -52,6 +52,7 @@ void main() {
       expect(box.getDouble('string_key'), null);
       expect(box.getString('string_key'), 'xiha');
     });
+
     test('collection types', () {
       expect(box.getList('list_key'), [1, 'a']);
       expect(box.getMap('list_key'), null);
@@ -59,6 +60,7 @@ void main() {
       expect(box.getList('map_key'), null);
       expect(box.getMap('map_key'), {'a': 1, 'b': 'x'});
     });
+
     test('object types', () {
       expect(box.getObject('obj_key', Person.fromJson), Person(name: 'kim', age: 10));
     });
