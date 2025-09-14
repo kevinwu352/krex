@@ -1,4 +1,4 @@
 library;
 
 part 'decode.dart';
-part 'as_ext.dart';
+part 'object_ext.dart';
