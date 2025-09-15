@@ -4,7 +4,7 @@ import 'package:krex/core/core.dart';
 
 void main() {
   group('MapExtTests', () {
-    test('map where', () {
+    test('map.where', () {
       final map = {'a': 1, 'b': null, 'c': 3, 'd': null};
       final map1 = map.where((k, v) => v is int);
       expect(map1, {'a': 1, 'c': 3});
@@ -12,16 +12,23 @@ void main() {
       // expect(map1, isA<Map<String, int>>());
     });
 
-    test('map whereType', () {
+    test('map.whereType', () {
       final map = {'a': 1, 'b': 'xxx', 'c': 3, 'd': 'yyy'};
       final map1 = map.whereType<int>();
       expect(map1, {'a': 1, 'c': 3});
       expect(map1, isA<Map<String, int>>());
     });
+
+    test('map.compactMap', () {
+      final map = {'a': 1, 'b': 2, 'c': 3, 'd': 4};
+      final map1 = map.compactMap((k, v) => v.isOdd ? v * v : null);
+      expect(map1, {'a': 1, 'c': 9});
+      expect(map1, isA<Map<String, int>>());
+    });
   });
 
   group('IterableExtTests', () {
-    test('iterable compactMap', () {
+    test('iterable.compactMap', () {
       final list1 = [1, 2, 3, 4];
       final list11 = list1.compactMap((e) => e.isEven ? '$e$e' : null).toList();
       expect(list11, ['22', '44']);

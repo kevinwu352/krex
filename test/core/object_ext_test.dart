@@ -4,7 +4,7 @@ import 'package:krex/core/core.dart';
 
 void main() {
   group('ObjectExtTests', () {
-    test('object asOr', () {
+    test('object.asOr', () {
       final ia = _getInt(true);
       expect(ia.asOr<int>() ?? 12, 10);
       final ib = _getInt(false);
