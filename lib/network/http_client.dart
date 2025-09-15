@@ -1,5 +1,5 @@
 import 'package:http/http.dart';
-import '/utils/result.dart';
+import '/core/core.dart';
 import 'endpoint.dart';
 
 // exception in network

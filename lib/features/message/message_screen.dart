@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:krex/utils/result.dart';
+import '/core/core.dart';
 import '/network/http_client.dart';
 import '/utils/list_view_ext.dart';
 import 'message_view_model.dart';

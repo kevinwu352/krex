@@ -1,7 +1,6 @@
 import 'dart:collection';
 import 'package:flutter/foundation.dart';
-import '/utils/command.dart';
-import '/utils/result.dart';
+import '/core/core.dart';
 
 import 'message_repository.dart';
 import 'message.dart';

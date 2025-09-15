@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
+import '/core/core.dart';
 import '/network/http_client.dart';
 import '/network/decode.dart';
-import '/utils/result.dart';
 
 import 'message_api.dart';
 import 'message.dart';
