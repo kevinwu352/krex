@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/l10n/localizations.dart';
 
-import '/storage/secures.dart';
-import '/storage/defaults.dart';
-import '/network/http_client.dart';
+import '/core/core.dart';
+import '/network/network.dart';
+import '/storage/storage.dart';
 import '/ui/router.dart';
 import '/ui/theme.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:krex/core/core.dart';
+import 'package:krex/core/collection_ext.dart';
 
 void main() {
   group('MapExtTests', () {

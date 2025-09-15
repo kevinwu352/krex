@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/l10n/localizations.dart';
-import '/storage/defaults.dart';
+import '/storage/storage.dart';
 import '/utils/list_view_ext.dart';
 
 class LanguageScreen extends StatelessWidget {
