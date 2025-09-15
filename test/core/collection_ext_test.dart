@@ -29,33 +29,17 @@ void main() {
       final map31 = map3.keyed();
       expect(map31, {'a': 1, 'b': 'x'});
       expect(map31, isA<Map<String, Object>>());
+      final map32 = map3.keyed(true);
+      expect(map32, {'a': 1, 'b': 'x', '1': 11});
+      expect(map32, isA<Map<String, Object>>());
 
       final map4 = {'a': 1, 'b': 'x', 1: 11, null: null};
       final map41 = map4.keyed();
       expect(map41, {'a': 1, 'b': 'x'});
       expect(map41, isA<Map<String, Object?>>());
-    });
-
-    test('map.toKeyed', () {
-      final map1 = {'a': 1};
-      final map11 = map1.toKeyed();
-      expect(map11, {'a': 1});
-      expect(map11, isA<Map<String, int>>());
-
-      final map2 = {'a': 1, 'b': 'x'};
-      final map21 = map2.toKeyed();
-      expect(map21, {'a': 1, 'b': 'x'});
-      expect(map21, isA<Map<String, Object>>());
-
-      final map3 = {'a': 1, 'b': 'x', 1: 11};
-      final map31 = map3.toKeyed();
-      expect(map31, {'a': 1, 'b': 'x', '1': 11});
-      expect(map31, isA<Map<String, Object>>());
-
-      final map4 = {'a': 1, 'b': 'x', 1: 11, null: null, '1': 'xx'};
-      final map41 = map4.toKeyed();
-      expect(map41, {'a': 1, 'b': 'x', '1': 'xx', 'null': null});
-      expect(map41, isA<Map<String, Object?>>());
+      final map42 = map4.keyed(true);
+      expect(map42, {'a': 1, 'b': 'x', '1': 11, 'null': null});
+      expect(map42, isA<Map<String, Object?>>());
     });
 
     test('map.where', () {

@@ -9,21 +9,17 @@ extension MapExt<K, V> on Map<K, V> {
     }
   }
 
-  Map<String, V> keyed() {
+  Map<String, V> keyed([bool convert = false]) {
     if (this is Map<String, V>) {
       return cast<String, V>();
     } else {
-      return Map.fromEntries(
-        entries.map((e) => MapEntry(e.key is String ? e.key : null, e.value)).where((e) => e.key != null),
-      ).cast<String, V>();
-    }
-  }
-
-  Map<String, V> toKeyed() {
-    if (this is Map<String, V>) {
-      return cast<String, V>();
-    } else {
-      return map((k, v) => MapEntry(k is String ? k : k.toString(), v));
+      if (convert) {
+        return map((k, v) => MapEntry(k is String ? k : k.toString(), v));
+      } else {
+        return Map.fromEntries(
+          entries.map((e) => MapEntry(e.key is String ? e.key : null, e.value)).where((e) => e.key != null),
+        ).cast<String, V>();
+      }
     }
   }
 
