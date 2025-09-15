@@ -3,6 +3,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const kCurrentAppVersion = '0.1.0';
 
+enum _SecuresKeys { kBoardedVersionKey, kLastUsernameKey, kAccessTokenKey }
+
 final class Secures extends ChangeNotifier {
   Secures({bool onDisk = true}) {
     _raw = onDisk ? FlutterSecureStorage() : null;
@@ -12,17 +14,17 @@ final class Secures extends ChangeNotifier {
   Future<void> load() async {
     if (kDebugMode) debugPrint('${await _raw?.readAll()}');
 
-    _boardedVersion = await _raw?.read(key: 'boarded_version');
+    _boardedVersion = await _raw?.read(key: _SecuresKeys.kBoardedVersionKey.name);
 
-    _lastUsername = await _raw?.read(key: 'last_username');
-    _accessToken = await _raw?.read(key: 'access_token');
+    _lastUsername = await _raw?.read(key: _SecuresKeys.kLastUsernameKey.name);
+    _accessToken = await _raw?.read(key: _SecuresKeys.kAccessTokenKey.name);
   }
 
   String? _boardedVersion;
   String? get boardedVersion => _boardedVersion;
   set boardedVersion(String? value) {
     _boardedVersion = value;
-    _raw?.write(key: 'boarded_version', value: value);
+    _raw?.write(key: _SecuresKeys.kBoardedVersionKey.name, value: value);
     notifyListeners();
   }
 
@@ -30,7 +32,7 @@ final class Secures extends ChangeNotifier {
   String? get lastUsername => _lastUsername;
   set lastUsername(String? value) {
     _lastUsername = value;
-    _raw?.write(key: 'last_username', value: value);
+    _raw?.write(key: _SecuresKeys.kLastUsernameKey.name, value: value);
     notifyListeners();
   }
 
@@ -38,7 +40,7 @@ final class Secures extends ChangeNotifier {
   String? get accessToken => _accessToken;
   set accessToken(String? value) {
     _accessToken = value;
-    _raw?.write(key: 'access_token', value: value);
+    _raw?.write(key: _SecuresKeys.kAccessTokenKey.name, value: value);
     notifyListeners();
   }
 }
