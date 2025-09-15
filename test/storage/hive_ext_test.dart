@@ -30,7 +30,7 @@ void main() {
     // print(box.toMap());
   });
 
-  group('Hive Ext Tests', () {
+  group('HiveExtTests', () {
     test('basic types', () {
       expect(box.getBool('bool_key'), true);
       expect(box.getInt('bool_key'), null);

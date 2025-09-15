@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:krex/core/core.dart';
 
 void main() {
-  group('Object Ext Tests', () {
+  group('ObjectExtTests', () {
     test('object asOr', () {
       final ia = _getInt(true);
       expect(ia.asOr<int>() ?? 12, 10);

@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:krex/storage/secures.dart';
 
 void main() {
-  group('Secures Tests', () {
+  group('SecuresTests', () {
     test('version number', () {
       expect('3.6.9'.versionNum, 3006009);
       expect('3.6.98'.versionNum, 3006098);
