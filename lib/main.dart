@@ -49,8 +49,8 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: language,
-      theme: ThemeData(colorScheme: AppThemes.lightColorScheme),
-      darkTheme: ThemeData(colorScheme: AppThemes.darkColorScheme),
+      theme: ThemeData(colorScheme: MySchemes.light),
+      darkTheme: ThemeData(colorScheme: MySchemes.dark),
       themeMode: theme,
       routerConfig: router(secures.showOnboard, secures.showLogin),
     );

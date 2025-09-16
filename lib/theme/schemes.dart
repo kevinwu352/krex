@@ -11,8 +11,8 @@ abstract final class AppColors {
   static const red1 = Color(0xFFE74C3C);
 }
 
-abstract final class AppThemes {
-  static const lightColorScheme = ColorScheme(
+abstract final class MySchemes {
+  static const light = ColorScheme(
     brightness: Brightness.light,
     primary: AppColors.black1,
     onPrimary: AppColors.white1,
@@ -24,7 +24,7 @@ abstract final class AppThemes {
     onSurface: AppColors.black1,
   );
 
-  static const darkColorScheme = ColorScheme(
+  static const dark = ColorScheme(
     brightness: Brightness.dark,
     primary: AppColors.white1,
     onPrimary: AppColors.black1,
