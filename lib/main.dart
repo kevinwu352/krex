@@ -3,13 +3,16 @@ import 'package:provider/provider.dart';
 import '/l10n/localizations.dart';
 
 import '/core/core.dart';
-import '/network/network.dart';
 import '/storage/storage.dart';
+import '/network/network.dart';
+
 import '/ui/router.dart';
 import '/ui/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await pathinit();
 
   final secures = Secures();
   await secures.load();
