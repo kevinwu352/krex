@@ -5,9 +5,9 @@ import '/l10n/localizations.dart';
 import '/core/core.dart';
 import '/storage/storage.dart';
 import '/network/network.dart';
+import 'theme/theme.dart';
 
 import '/ui/router.dart';
-import '/ui/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
