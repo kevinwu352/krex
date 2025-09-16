@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import '/core/core.dart';
 import 'hive_ext.dart';
+import 'app_theme.dart';
 
 enum _DefaultsKeys { kThemeCodeKey, kLanguageCodeKey }
 
@@ -19,6 +20,7 @@ final class Defaults extends ChangeNotifier {
   Future<void> load() async {
     final themeVal = _box.getString(_DefaultsKeys.kThemeCodeKey.name);
     _theme = ThemeMode.values.firstWhere((e) => e.name == themeVal, orElse: () => ThemeMode.system);
+    kCurrentTheme = AppTheme.fromThemeMode(_theme);
 
     final languageVal = _box.getList(_DefaultsKeys.kLanguageCodeKey.name)?.whereType<String>().toList() ?? [];
     _language = languageVal.isNotEmpty ? Locale(languageVal[0], languageVal.elementAtOrNull(1)) : null;

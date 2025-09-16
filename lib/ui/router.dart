@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import '/storage/storage.dart';
 
 import '/features/onboard/onboard_screen.dart';
 import '/features/auth/login_screen.dart';
@@ -22,6 +23,17 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final bright1 = Theme.of(context).brightness;
+    // // final bright2 = MediaQuery.of(context).platformBrightness;
+    // final bright3 = MediaQuery.platformBrightnessOf(context);
+    // print('bright2: $bright1 $bright3');
+
+    // final locale = Localizations.localeOf(context);
+    // print('locale2: $locale');
+
+    kCurrentTheme = AppTheme.fromBrightness(MediaQuery.platformBrightnessOf(context));
+    print('theme2: $kCurrentTheme');
+
     return Scaffold(
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (value) => shell.goBranch(value),
