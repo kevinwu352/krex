@@ -8,14 +8,14 @@ import 'hive_ext.dart';
 enum _DefaultsKeys { kThemeCodeKey, kLanguageCodeKey }
 
 final class Defaults extends ChangeNotifier {
-  late Box<dynamic> _box;
+  late Box<Object> _box;
 
   Future<void> init() async {
     final dir = await getApplicationDocumentsDirectory();
     if (kDebugMode) debugPrint(dir.path);
     Hive.init(join(dir.path, 'hive'));
 
-    _box = await Hive.openBox('defaults');
+    _box = await Hive.openBox<Object>('defaults');
 
     if (kDebugMode) debugPrint('${_box.toMap()}');
   }
@@ -32,7 +32,7 @@ final class Defaults extends ChangeNotifier {
   ThemeMode get theme => _theme;
   set theme(ThemeMode value) {
     _theme = value;
-    _box.put(_DefaultsKeys.kThemeCodeKey.name, value.name);
+    _box.setValue(_DefaultsKeys.kThemeCodeKey.name, value.name);
     notifyListeners();
   }
 
@@ -41,7 +41,7 @@ final class Defaults extends ChangeNotifier {
   set language(Locale? value) {
     _language = value;
     final list = value is Locale ? [value.languageCode, ?value.countryCode] : null;
-    _box.put(_DefaultsKeys.kLanguageCodeKey.name, list);
+    _box.setValue(_DefaultsKeys.kLanguageCodeKey.name, list);
     notifyListeners();
   }
 }

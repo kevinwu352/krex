@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-const kCurrentAppVersion = '0.1.0';
-
 enum _SecuresKeys { kBoardedVersionKey, kLastUsernameKey, kAccessTokenKey }
 
 final class Secures extends ChangeNotifier {
@@ -44,6 +42,8 @@ final class Secures extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+const kCurrentAppVersion = '0.1.0';
 
 extension SecuresExt on Secures {
   bool get showOnboard {
