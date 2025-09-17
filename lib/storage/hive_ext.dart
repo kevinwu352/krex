@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-
 import '/core/core.dart';
 
 extension HiveBoxExt<E> on Box<E> {

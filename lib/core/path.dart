@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
-late String _docroot;
+var _docroot = '';
 
 Future<void> pathinit() async {
   final dir = await getApplicationDocumentsDirectory();

@@ -11,16 +11,14 @@ final class Defaults extends ChangeNotifier {
 
   Future<void> init() async {
     Hive.init(pathmk('hive'));
-
     _box = await Hive.openBox<Object>('defaults');
-
-    // _box.setValue(_DefaultsKeys.kThemeCodeKey.name, null);
-    // _box.setValue(_DefaultsKeys.kLanguageCodeKey.name, null);
-
-    if (kDebugMode) debugPrint('${_box.toMap()}');
   }
 
   Future<void> load() async {
+    // await _box.setValue(_DefaultsKeys.kThemeCodeKey.name, null);
+    // await _box.setValue(_DefaultsKeys.kLanguageCodeKey.name, null);
+    if (kDebugMode) debugPrint('${_box.toMap()}');
+
     final themeVal = _box.getString(_DefaultsKeys.kThemeCodeKey.name);
     _theme = ThemeMode.values.firstWhere((e) => e.name == themeVal, orElse: () => ThemeMode.system);
 

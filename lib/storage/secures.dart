@@ -10,10 +10,12 @@ final class Secures extends ChangeNotifier {
   FlutterSecureStorage? _raw;
 
   Future<void> load() async {
+    // await _raw?.write(key: _SecuresKeys.kBoardedVersionKey.name, value: null);
+    // await _raw?.write(key: _SecuresKeys.kLastUsernameKey.name, value: null);
+    // await _raw?.write(key: _SecuresKeys.kAccessTokenKey.name, value: null);
     if (kDebugMode) debugPrint('${await _raw?.readAll()}');
 
     _boardedVersion = await _raw?.read(key: _SecuresKeys.kBoardedVersionKey.name);
-
     _lastUsername = await _raw?.read(key: _SecuresKeys.kLastUsernameKey.name);
     _accessToken = await _raw?.read(key: _SecuresKeys.kAccessTokenKey.name);
   }
@@ -42,6 +44,8 @@ final class Secures extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+// ================================================================================
 
 const kCurrentAppVersion = '0.1.0';
 
