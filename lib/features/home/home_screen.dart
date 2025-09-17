@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '/theme/theme.dart';
 import '/ui/router.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,7 +20,9 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(child: Text('data')),
+      body: Center(
+        child: Text('data', style: MyStyles.title3.copyWith(color: MyColors.viewBg(context))),
+      ),
     );
   }
 }

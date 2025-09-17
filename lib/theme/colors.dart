@@ -1,32 +1,47 @@
 import 'package:flutter/material.dart';
-import '/storage/storage.dart';
+
+// [dark, light]
+
+// MyColors.xxxs          => color list
+// MyColors.xxx(context)  => color for current theme
+// MyColors.xxx           => single color
 
 abstract final class MyColors {
-  static const _viewBg = [Colors.red, Colors.green];
-  static Color get viewBg => _viewBg[kCurrentTheme.index];
+  static const viewBgs = [Colors.green, Colors.red];
+  static Color viewBg(BuildContext context) => viewBgs[Theme.of(context).brightness.index];
 
-  // static viewBg() => _viewBg[kCurrentTheme.index];
+  static const black1 = Color(0xFF101010);
+  static const white1 = Color(0xFFFFF7FA);
+  static const grey1 = Color(0xFFF2F2F2);
+  static const grey2 = Color(0xFF4D4D4D);
+  static const grey3 = Color(0xFFA4A4A4);
+  static const whiteTransparent = Color(0x4DFFFFFF); // Figma rgba(255, 255, 255, 0.3)
+  static const blackTransparent = Color(0x4D000000);
+  static const red1 = Color(0xFFE74C3C);
+}
 
-  // static Color get counter1 => _viewBg[kCurrentTheme.index];
-  // static Color get counter {
-  //   return _viewBg[kTheme.index];
-  // }
+abstract final class MySchemes {
+  static const light = ColorScheme(
+    brightness: Brightness.light,
+    primary: MyColors.black1,
+    onPrimary: MyColors.white1,
+    secondary: Colors.red, // MyColors.black1
+    onSecondary: MyColors.white1,
+    error: Colors.white,
+    onError: Colors.red,
+    surface: Colors.white,
+    onSurface: MyColors.black1,
+  );
 
-  // static const title1 = TextStyle(fontFamily: fontFamily, fontSize: 60, fontWeight: FontWeight.w800);
-  // static const title2 = TextStyle(fontFamily: fontFamily, fontSize: 48, fontWeight: FontWeight.w800);
-  // static const title3 = TextStyle(fontFamily: fontFamily, fontSize: 34, fontWeight: FontWeight.w900);
-
-  // static const headline = TextStyle(fontFamily: fontFamily, fontSize: 24, fontWeight: FontWeight.w800);
-  // static const subheadline = TextStyle(fontFamily: fontFamily, fontSize: 18, fontWeight: FontWeight.w800);
-
-  // static const body = TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.w400);
-  // static const bodyBold = TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.w800);
-  // static const smallBody = TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w400);
-  // static const smallBodyBold = TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w800);
-
-  // static const caption = TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.w700);
-
-  // static const buttonLarge = TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.w700);
-  // static const buttonMedium = TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontWeight.w800);
-  // static const buttonSmall = TextStyle(fontFamily: fontFamily, fontSize: 12, fontWeight: FontWeight.w800);
+  static const dark = ColorScheme(
+    brightness: Brightness.dark,
+    primary: MyColors.white1,
+    onPrimary: MyColors.black1,
+    secondary: Colors.green, // MyColors.white1
+    onSecondary: MyColors.black1,
+    error: Colors.black,
+    onError: MyColors.red1,
+    surface: MyColors.black1,
+    onSurface: Colors.white,
+  );
 }
