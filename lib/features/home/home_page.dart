@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import '/theme/theme.dart';
 import '/ui/router.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {

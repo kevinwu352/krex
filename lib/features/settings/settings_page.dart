@@ -6,8 +6,8 @@ import '/storage/storage.dart';
 import '/ui/router.dart';
 import '/utils/list_view_ext.dart';
 
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
 
   final _items = const [
     _Item(name: 'Language', value: Routes.settingsLanguage),

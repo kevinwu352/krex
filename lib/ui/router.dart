@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '/features/onboard/onboard_screen.dart';
-import '/features/auth/login_screen.dart';
+import '/features/onboard/onboard_page.dart';
+import '/features/auth/login_page.dart';
 
-import '/features/home/home_screen.dart';
-import '/features/live/live_screen.dart';
-import '/features/profile/profile_screen.dart';
+import '/features/home/home_page.dart';
+import '/features/live/live_page.dart';
+import '/features/profile/profile_page.dart';
 
-import '/features/settings/settings_screen.dart';
-import '/features/settings/language_screen.dart';
-import '/features/settings/theme_screen.dart';
+import '/features/settings/settings_page.dart';
+import '/features/settings/language_page.dart';
+import '/features/settings/theme_page.dart';
 
-import '/features/message/message_screen.dart';
+import '/features/message/message_page.dart';
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({super.key, required this.shell});
+class MainPage extends StatelessWidget {
+  const MainPage({super.key, required this.shell});
 
   final StatefulNavigationShell shell;
 
@@ -63,33 +63,33 @@ GoRouter router(bool showOnboard, bool showLogin) => GoRouter(
       ? Routes.login
       : Routes.home,
   routes: [
-    GoRoute(path: Routes.onboard, builder: (context, state) => OnboardScreen()),
-    GoRoute(path: Routes.login, builder: (context, state) => LoginScreen()),
+    GoRoute(path: Routes.onboard, builder: (context, state) => OnboardPage()),
+    GoRoute(path: Routes.login, builder: (context, state) => LoginPage()),
     StatefulShellRoute.indexedStack(
-      builder: (context, state, shell) => MainScreen(shell: shell),
+      builder: (context, state, shell) => MainPage(shell: shell),
       branches: [
         StatefulShellBranch(
-          routes: [GoRoute(path: Routes.home, builder: (context, state) => HomeScreen())],
+          routes: [GoRoute(path: Routes.home, builder: (context, state) => HomePage())],
         ),
         StatefulShellBranch(
-          routes: [GoRoute(path: Routes.live, builder: (context, state) => LiveScreen())],
+          routes: [GoRoute(path: Routes.live, builder: (context, state) => LivePage())],
         ),
         StatefulShellBranch(
-          routes: [GoRoute(path: Routes.profile, builder: (context, state) => ProfileScreen())],
+          routes: [GoRoute(path: Routes.profile, builder: (context, state) => ProfilePage())],
         ),
       ],
     ),
     GoRoute(
       path: Routes.settings,
-      builder: (context, state) => SettingsScreen(),
+      builder: (context, state) => SettingsPage(),
       routes: [
-        GoRoute(path: Routes._settingsLanguage, builder: (context, state) => LanguageScreen()),
-        GoRoute(path: Routes._settingsTheme, builder: (context, state) => ThemeScreen()),
+        GoRoute(path: Routes._settingsLanguage, builder: (context, state) => LanguagePage()),
+        GoRoute(path: Routes._settingsTheme, builder: (context, state) => ThemePage()),
       ],
     ),
     GoRoute(
       path: Routes.message,
-      builder: (context, state) => MessageScreen.create(network: context.read()),
+      builder: (context, state) => MessagePage.create(network: context.read()),
     ),
   ],
 );

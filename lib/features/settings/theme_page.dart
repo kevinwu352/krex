@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import '/storage/storage.dart';
 import '/utils/list_view_ext.dart';
 
-class ThemeScreen extends StatelessWidget {
-  ThemeScreen({super.key});
+class ThemePage extends StatelessWidget {
+  ThemePage({super.key});
 
   final _items = ThemeMode.values.map((e) => _Item(name: e.name, value: e)).toList();
 

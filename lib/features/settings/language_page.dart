@@ -4,8 +4,8 @@ import '/l10n/localizations.dart';
 import '/storage/storage.dart';
 import '/utils/list_view_ext.dart';
 
-class LanguageScreen extends StatelessWidget {
-  LanguageScreen({super.key});
+class LanguagePage extends StatelessWidget {
+  LanguagePage({super.key});
 
   final _items = AppLocalizations.supportedLocales.map((e) => _Item(name: e.toLanguageTag(), value: e)).toList();
 

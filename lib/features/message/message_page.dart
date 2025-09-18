@@ -5,19 +5,19 @@ import '/utils/list_view_ext.dart';
 import 'message_view_model.dart';
 import 'message_repository.dart';
 
-class MessageScreen extends StatefulWidget {
-  const MessageScreen({super.key, required MessageViewModel vm}) : _vm = vm;
+class MessagePage extends StatefulWidget {
+  const MessagePage({super.key, required MessageViewModel vm}) : _vm = vm;
 
   final MessageViewModel _vm;
 
-  MessageScreen.create({super.key, required Networkable network})
+  MessagePage.create({super.key, required Networkable network})
     : _vm = MessageViewModel(repo: MessageRepository(network: network));
 
   @override
-  State<MessageScreen> createState() => _MessageScreenState();
+  State<MessagePage> createState() => _MessagePageState();
 }
 
-class _MessageScreenState extends State<MessageScreen> {
+class _MessagePageState extends State<MessagePage> {
   @override
   void initState() {
     super.initState();

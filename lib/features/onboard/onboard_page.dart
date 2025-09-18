@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import '/storage/storage.dart';
 import '/ui/router.dart';
 
-class OnboardScreen extends StatelessWidget {
-  const OnboardScreen({super.key});
+class OnboardPage extends StatelessWidget {
+  const OnboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {

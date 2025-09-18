@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LiveScreen extends StatelessWidget {
-  const LiveScreen({super.key});
+class LivePage extends StatelessWidget {
+  const LivePage({super.key});
 
   @override
   Widget build(BuildContext context) {

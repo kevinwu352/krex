@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import '/storage/storage.dart';
 import '/ui/router.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
