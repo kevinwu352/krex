@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import '/core/core.dart';
 import '/network/network.dart';
 
@@ -18,19 +17,18 @@ class MessageRepository implements MessageRepo {
   @override
   Future<Result<List<Message>>> getAllMessages() async {
     try {
-      final result = await _network.req(MessageApi.getAll());
+      final res = await _network.requestRes(MessageApi.getAll(), Message.fromJson);
       await Future.delayed(Duration(seconds: 1));
-      switch (result) {
+      switch (res) {
         case Ok():
-          // if (kDebugMode) debugPrint('${result.value}');
-          final list = await compute((message) => key2list(message, 'data', Message.fromJson), result.value.body);
+          final list = res.value.getList<Message>() ?? [];
           return Result.ok(list);
         case Error():
-          // if (kDebugMode) debugPrint('${result.error}');
-          return Result.error(result.error);
+          return Result.error(res.error);
       }
     } catch (e) {
-      return Result.error(HttpExcep.decodeError());
+      final error = e is HttpError ? e : HttpError.unknownError();
+      return Result.error(error);
     }
   }
 
@@ -38,7 +36,7 @@ class MessageRepository implements MessageRepo {
   Future<Result<void>> deleteMessage(int id) async {
     await Future.delayed(Duration(seconds: 1));
     if (id % 2 == 1) {
-      return Result.error(HttpExcep.operationFailed());
+      return Result.error(HttpError.unknownError());
     } else {
       return Result.ok(null);
     }

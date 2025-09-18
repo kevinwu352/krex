@@ -1,21 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import '/core/core.dart';
 import 'endpoint.dart';
-
-// exception in network
-class HttpExcep implements Exception {
-  HttpExcep({required this.info});
-  final String info;
-  HttpExcep.networkError() : info = 'Network Error';
-  HttpExcep.statusError() : info = 'Status Error';
-  HttpExcep.decodeError() : info = 'Decode Error';
-  HttpExcep.operationFailed() : info = 'Operation Failed';
-  @override
-  String toString() => info;
-}
+import 'error.dart';
+import 'response.dart';
 
 abstract class Networkable {
-  Future<Result<Response>> req(Endpoint api);
+  Future<Result<Response>> requestResponse(Endpoint api);
+  Future<Result<Res>> requestRes<T>(Endpoint api, [T Function(Map<String, dynamic>)? init]);
 }
 
 final class HttpClient implements Networkable {
@@ -36,7 +28,29 @@ final class HttpClient implements Networkable {
   }
 
   @override
-  Future<Result<Response>> req(Endpoint api) async {
+  Future<Result<Response>> requestResponse(Endpoint api) async {
+    try {
+      final response = await _req(api);
+      return Result.ok(response);
+    } catch (e) {
+      final error = e is HttpError ? e : HttpError.unknownError();
+      return Result.error(error);
+    }
+  }
+
+  @override
+  Future<Result<Res>> requestRes<T>(Endpoint api, [T Function(Map<String, dynamic>)? init]) async {
+    try {
+      final response = await _req(api);
+      final res = await compute((message) => parse(message, init), response.body);
+      return Result.ok(res);
+    } catch (e) {
+      final error = e is HttpError ? e : HttpError.unknownError();
+      return Result.error(error);
+    }
+  }
+
+  Future<Response> _req(Endpoint api) async {
     try {
       final Response response;
       switch (api.method) {
@@ -48,12 +62,12 @@ final class HttpClient implements Networkable {
           response = await post(uri, headers: api.heads(headers), body: api.body());
       }
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        return Result.ok(response);
+        return response;
       } else {
-        return Result.error(HttpExcep.statusError());
+        throw HttpError.statusError();
       }
     } catch (e) {
-      return Result.error(HttpExcep.networkError());
+      throw e is HttpError ? e : HttpError.networkError();
     }
   }
 }
