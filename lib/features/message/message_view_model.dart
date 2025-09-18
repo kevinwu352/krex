@@ -20,7 +20,7 @@ final class MessageViewModel extends ChangeNotifier {
   Exception? _error;
   Exception? get error => _error;
 
-  List<Message> _messageList = [];
+  Messages _messageList = [];
   UnmodifiableListView<Message> get messageList => UnmodifiableListView(_messageList);
 
   late final Command0<void> load;

@@ -6,8 +6,8 @@ import 'error.dart';
 import 'response.dart';
 
 abstract class Networkable {
-  Future<Result<Response>> requestResponse(Endpoint api);
-  Future<Result<Res>> requestRes<T>(Endpoint api, [T Function(Map<String, dynamic>)? init]);
+  Future<Result<Response>> getraw(Endpoint api);
+  Future<Result<Res>> getres<T>(Endpoint api, [T Function(Map<String, dynamic>)? init]);
 }
 
 final class HttpClient implements Networkable {
@@ -28,7 +28,7 @@ final class HttpClient implements Networkable {
   }
 
   @override
-  Future<Result<Response>> requestResponse(Endpoint api) async {
+  Future<Result<Response>> getraw(Endpoint api) async {
     try {
       final response = await _req(api);
       return Result.ok(response);
@@ -39,7 +39,7 @@ final class HttpClient implements Networkable {
   }
 
   @override
-  Future<Result<Res>> requestRes<T>(Endpoint api, [T Function(Map<String, dynamic>)? init]) async {
+  Future<Result<Res>> getres<T>(Endpoint api, [T Function(Map<String, dynamic>)? init]) async {
     try {
       final response = await _req(api);
       final res = await compute((message) => parse(message, init), response.body);

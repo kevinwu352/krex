@@ -16,3 +16,5 @@ final class Message {
   @override
   String toString() => '[$id:$title:$body]';
 }
+
+typedef Messages = List<Message>;

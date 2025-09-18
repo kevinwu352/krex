@@ -5,7 +5,7 @@ import 'message_api.dart';
 import 'message.dart';
 
 abstract class MessageRepo {
-  Future<Result<List<Message>>> getAllMessages();
+  Future<Result<Messages>> getAllMessages();
   Future<Result<void>> deleteMessage(int id);
 }
 
@@ -15,9 +15,9 @@ class MessageRepository implements MessageRepo {
   final Networkable _network;
 
   @override
-  Future<Result<List<Message>>> getAllMessages() async {
+  Future<Result<Messages>> getAllMessages() async {
     try {
-      final res = await _network.requestRes(MessageApi.getAll(), Message.fromJson);
+      final res = await _network.getres(MessageApi.getAll(), Message.fromJson);
       await Future.delayed(Duration(seconds: 1));
       switch (res) {
         case Ok():
