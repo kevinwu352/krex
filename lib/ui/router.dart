@@ -17,19 +17,21 @@ import '/features/message/message_page.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key, required this.shell});
-
   final StatefulNavigationShell shell;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (value) => shell.goBranch(value),
         selectedIndex: shell.currentIndex,
+        indicatorColor: Colors.amber,
+        labelTextStyle: WidgetStateTextStyle.resolveWith(
+          (states) => TextStyle(color: states.contains(WidgetState.selected) ? Colors.amber : Colors.black),
+        ),
         destinations: [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.live_tv), label: 'Live'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
+          NavigationDestination(icon: Icon(Icons.home), selectedIcon: Icon(Icons.star), label: 'Home'),
+          NavigationDestination(icon: Icon(Icons.live_tv), selectedIcon: Icon(Icons.star), label: 'Live'),
+          NavigationDestination(icon: Icon(Icons.person), selectedIcon: Icon(Icons.star), label: 'Profile'),
         ],
       ),
       body: shell,
